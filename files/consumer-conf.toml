@@ -1,16 +1,14 @@
-# This file needs to be edited !
+# Possible values "panic", "fatal", "error", "warn", "info", "debug", "trace"
+log_level = "warn"
+download_dir = "/samples"
 
 [backend]
 address = 'http://{{ include "saferwall.fullname" . }}-backend'
 admin_user = "Administrator"
 admin_pwd = "password"
 
-[consumer]
-# Possible values "panic", "fatal", "error", "warn", "info", "debug", "trace"
-log_level = "warn"
-download_dir = "/samples"
-
 [ml]
+enabled = false
 address = 'http://{{ include "saferwall.fullname" . }}-ml'
 
 [nsq]
@@ -21,6 +19,7 @@ lookupds = [
 {{- end }}]
 
 [minio]
+enabled = true
 endpoint = '{{ printf "%s-minio" .Release.Name }}:9000'
 seckey = "{{ .Values.minio.secretKey }}"
 accesskey = "{{ .Values.minio.accessKey }}"
@@ -28,9 +27,11 @@ spacename = "{{ .Values.minio.spacename }}"
 ssl = false
 
 [multiav]
+  enabled = true
+  [multiav.vendors]
 {{- $root := . -}}
 {{- range $av, $value := .Values.multiav.vendors }}
-  [multiav.{{ $av }}]
-  enabled = {{ $value.enabled }}
-  addr = "{{ include "saferwall.fullname" $root }}-multiav-{{ $av }}:50051"
+    [multiav.vendors.{{ $av }}]
+    enabled = {{ $value.enabled }}
+    address = "{{ include "saferwall.fullname" $root }}-multiav-{{ $av }}:50051"
 {{- end }}
