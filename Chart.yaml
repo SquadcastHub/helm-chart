@@ -21,7 +21,7 @@ dependencies:
       repository: https://couchbase-partners.github.io/helm-charts/
       condition: couchbase-operator.enabled
     - name: efs-provisioner
-      version: 0.13.2
+      version: 0.13.3
       repository: https://isotoma.github.io/charts
       condition: efs-provisioner.enabled
     - name: nfs-server-provisioner
@@ -29,23 +29,23 @@ dependencies:
       repository: https://kvaps.github.io/charts
       condition: nfs-server-provisioner.enabled
     - name: ingress-nginx
-      version: 3.25.0
+      version: 3.33.0
       repository: https://kubernetes.github.io/ingress-nginx/
       condition: ingress-nginx.enabled
     - name: filebeat
-      version: 7.12.0
+      version: 7.13.1
       repository: https://helm.elastic.co
       condition: filebeat.enabled
     - name: elasticsearch
-      version: 7.12.0
+      version: 7.13.1
       repository: https://helm.elastic.co
       condition: elasticsearch.enabled
     - name: kibana
-      version: 7.12.0
+      version: 7.13.1
       repository: https://helm.elastic.co
       condition: kibana.enabled
     - name: kube-prometheus-stack
-      version: 14.3.0
+      version: 16.6.2
       repository: https://prometheus-community.github.io/helm-charts
       condition: kube-prometheus-stack.enabled
     - name: cluster-autoscaler
