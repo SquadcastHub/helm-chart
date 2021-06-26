@@ -38,7 +38,7 @@ spec:
               memory: "{{ .Values.consumer.resources.limits.memory }}"
               cpu: "{{ .Values.consumer.resources.limits.cpu }}"
           env:
-            - name: ENVIRONMENT
+            - name: SFW_CONSUMER
               value: "prod"
       volumes:
       - name: samples
@@ -49,7 +49,7 @@ spec:
           name: {{ include "saferwall.fullname" . }}-consumer
           items:
             - key: consumer_conf
-              path: saferwall.prod.toml
+              path: prod.toml
       initContainers:
         - name: wait-for-couchbase
           image: groundnuty/k8s-wait-for:v1.3
